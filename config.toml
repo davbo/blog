@@ -1,0 +1,7 @@
+baseURL = "https://www.davbo.uk/"
+languageCode = "en-gb"
+title = "Dave sometimes writes"
+theme = "tale"
+
+[Author]
+    name = "Dave King"
