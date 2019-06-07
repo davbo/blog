@@ -2,6 +2,7 @@ baseURL = "https://www.davbo.uk/"
 languageCode = "en-gb"
 title = "Dave sometimes writes"
 theme = "tale"
+staticDir = ["static"]
 
 [Author]
     name = "Dave King"
