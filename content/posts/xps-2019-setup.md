@@ -6,6 +6,8 @@ author: Dave
 summary: Getting my new XPS ready for doing dev work was frustrating at times but I'm happy with the outcome. Hopefully sharing my setup can help others.
 ---
 
+_Updated: 27/06 with some additional notes on using fscrypt_
+
 ## Not cut out to be a Mac owner ##
 
 Recently I started some contract software development work. As my ThinkPad x200
@@ -91,7 +93,8 @@ for me with a couple of caveats:
 I'm curious if we'll see fscrypt `/home/$USER` encryption as an option in future
 Ubuntu installers.
 
-### Outstanding "Linux on the desktop" issues ###
+
+### OUTSTANDING "Linux on the desktop" issues ###
 
 It's still early days with the XPS 13 for me and I'm already following a couple
 of issues on launchpad and waiting for fixes make their way upstream into the
@@ -114,6 +117,32 @@ Recently I've been using [Nix][nix] more (my super old x200 has NixOS on it) and
 having [my home-configuration][home-config] in Nix and some nix-shell scripts
 ready made setting up a new laptop for dev work much easier.
 
+### Additional notes on fscrypt (27/06/2019)###
+
+Some things which I didn't figure out immediately after setting up my laptop
+with fscrypt have popped up and are worth noting. First I had an issue with
+Firefox failing to download files, I was happily working around this and figured
+it would be patched quickly. The second issue was with Docker volumes which gave
+the game away. After rebooting my laptop and restarting some docker containers
+which had persistent volumes I noticed errors. After opening a shell in the
+container it was quick the volume was mounted while still encrypted using
+fscrypt.
+
+The version of fscrypt shipped in Linux kernel's below 5.1 has behaviour where
+any attempts to move (e.g. using `mv`) unencrypted data into an encrypted folder
+will fail. In a [recent commit][linux commit] the error returned from the kernel
+changed. This tells tools (such as `mv`) to take a different action and instead
+of renaming they copy the contents to a new file.
+
+I highly recommend taking a read of that commit message as it's extremely well
+written and helped me understand what was going on within the kernel. It has
+also left me considering the power operating system's have with regards to how
+we interact with data and ingraining habits (both good and bad) over time.
+ 
+This Firefox [launchpad bug][launchpad issue] has confirmation that the issue
+goes away when running a kernel >=5.1. I'm hoping for something similar with the
+docker volume issue I've been seeing, but suspect that may be working a bit
+differently.
 
 [nosecam]: https://www.tomshardware.co.uk/dell-xps-13-price-specs-release-date,news-59718.html
 [home-config]: https://github.com/davbo/cfg
@@ -124,3 +153,6 @@ ready made setting up a new laptop for dev work much easier.
 [for a while now]: https://askubuntu.com/questions/696413/ubuntu-installer-cant-find-any-disk-on-dell-xps-13-9350
 [fscrypt]: https://github.com/google/fscrypt
 [fscrypt setup]: https://tlbdk.github.io/ubuntu/2018/10/22/fscrypt.html
+[rename syscall]: http://man7.org/linux/man-pages/man2/rename.2.html
+[linux commit]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=f5e55e777cc93eae
+[launchpad issue]: https://bugs.launchpad.net/ubuntu/+source/firefox/+bug/1796661
