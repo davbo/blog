@@ -1,8 +1,17 @@
 baseURL = "https://www.davbo.uk/"
 languageCode = "en-gb"
 title = "Dave sometimes writes"
-theme = "tale"
+theme = "charaka-hugo-theme"
 staticDir = ["static"]
+copyright = "&copy; <a href=\"https://github.com/davbo\">Dave King</a> 2019 - using <a href=\"https://github.com/natarajmb/charaka-hugo-theme\">Charaka Hugo theme</a>"
 
 [Author]
     name = "Dave King"
+
+[[params.social]]
+  url = "https://github.com/davbo"
+  fa_icon = "fab fa-github"
+
+[[params.social]]
+  url = "https://twitter.com/davbo"
+  fa_icon = "fab fa-twitter"
