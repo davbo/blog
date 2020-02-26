@@ -3,7 +3,7 @@ languageCode = "en-gb"
 title = "Dave sometimes writes"
 theme = "charaka-hugo-theme"
 staticDir = ["static"]
-copyright = "&copy; <a href=\"https://github.com/davbo\">Dave King</a> 2019 - using <a href=\"https://github.com/natarajmb/charaka-hugo-theme\">Charaka Hugo theme</a>"
+copyright = "&copy; <a href=\"https://github.com/davbo\">Dave King</a> 2020 - using <a href=\"https://github.com/natarajmb/charaka-hugo-theme\">Charaka Hugo theme</a>"
 pygmentsCodeFences = true
 
 [Author]
