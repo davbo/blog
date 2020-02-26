@@ -61,32 +61,32 @@ now though, in order to keep it simple and get a proof of concept working.
 Here's an example of a yara rule and the parser output.
 
 ```yara
-  rule add
-  {
-      meta:
-          description = "Add example wasm file"
-      strings:
-          $a = { 00 61 73 6D }
-          $b = { 61 64 64 }
-      condition:
-          ($a and $b)
-  }
+rule add
+{
+    meta:
+        description = "Add example wasm file"
+    strings:
+        $a = { 00 61 73 6D }
+        $b = { 61 64 64 }
+    condition:
+        ($a and $b)
+}
 ```
 
 ```rust
-    YaraRule {
-        name: Str("add",),
-        sections: [
-            Meta({Str("description",): Str("Add example wasm file",),},),
-            Strings({
-                    Str("$b",): Hex([Byte(54,), Byte(49,), Byte(54,), Byte(52,), Byte(54,), Byte(52,),],),
-                    Str("$a",): Hex([Byte(48,), Byte(48,), Byte(54,), Byte(49,), Byte(55,), Byte(51,), Byte(54,), Byte(68,),],),
-                    },),
-            Condition(
-                And(Identifier(Str("$a",),), Identifier(Str("$b",),),),
-            ),
-        ],
-    },
+YaraRule {
+    name: Str("add",),
+    sections: [
+        Meta({Str("description",): Str("Add example wasm file",),},),
+        Strings({
+                Str("$b",): Hex([Byte(54,), Byte(49,), Byte(54,), Byte(52,), Byte(54,), Byte(52,),],),
+                Str("$a",): Hex([Byte(48,), Byte(48,), Byte(54,), Byte(49,), Byte(55,), Byte(51,), Byte(54,), Byte(68,),],),
+                },),
+        Condition(
+            And(Identifier(Str("$a",),), Identifier(Str("$b",),),),
+        ),
+    ],
+},
 ```
 
 It was really interesting to build the parser using combinators, the ways the
@@ -114,9 +114,9 @@ My goal was to have make the following code which downloads and instantiates a
 malicious cryptocurrency miner fail:
 
 ```javascript
-       fetch('/cryptonight.wasm')
-         .then(r => r.arrayBuffer())
-         .then(bytes => WebAssembly.instantiate(bytes, {}))
+fetch('/cryptonight.wasm')
+  .then(r => r.arrayBuffer())
+  .then(bytes => WebAssembly.instantiate(bytes, {}))
 ```
 
 The good news is, this code fails already! Job done. Wait, what?..
@@ -135,36 +135,36 @@ tools.
 Here's what I ended up with:
 
 ```javascript
-     import init, { yara_match } from '../pkg/yara_rs.js';
-     async function run() {
-       await init();
+import init, { yara_match } from '../pkg/yara_rs.js';
+async function run() {
+  await init();
 
-       let instantiate = WebAssembly.instantiate;
-       WebAssembly.instantiate = function(bytes, imports) {
-         let view = new Uint8Array(bytes);
-         let match = yara_match(`
-      rule cryptonight
-      {
-        meta:
-          description = "Crytonight Miner"
-        strings:
-          $a = { 00 61 73 6D }
-          $b = { 63 72 79 70 74 6F 6E 69 67 68 74 5F 68 61 73 68 }
-        condition:
-          $a and $b
-      }`, view);
-         if (match) {
-           throw new Error("Matched yara Rule");
-         } else {
-           instantiate(bytes, imports);
-         }
-       }
+  let instantiate = WebAssembly.instantiate;
+  WebAssembly.instantiate = function(bytes, imports) {
+    let view = new Uint8Array(bytes);
+    let match = yara_match(`
+ rule cryptonight
+ {
+   meta:
+     description = "Crytonight Miner"
+   strings:
+     $a = { 00 61 73 6D }
+     $b = { 63 72 79 70 74 6F 6E 69 67 68 74 5F 68 61 73 68 }
+   condition:
+     $a and $b
+ }`, view);
+    if (match) {
+      throw new Error("Matched yara Rule");
+    } else {
+      instantiate(bytes, imports);
+    }
+  }
 
-       fetch('/sample-miners/nightcrypto.wasm')
-         .then(r => r.arrayBuffer())
-         .then(bytes => WebAssembly.instantiate(bytes, {}));
-     }
-     run();
+  fetch('/sample-miners/nightcrypto.wasm')
+    .then(r => r.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes, {}));
+}
+run();
 ```
 
 If you'd like to try it out for yourself please clone [`yara-rs`][yara-rs] and
