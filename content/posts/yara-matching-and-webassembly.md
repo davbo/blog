@@ -41,9 +41,10 @@ this is a path browser vendors or anyone should pursue.
 This gave me the idea to try and run `yara` in the browser. This way if a
 malicious cryptocurrency miner attempts to load I can detect it and block it.
 
-The `yara` tool however is written in C/C++. Libraries exist for other languages
-but they seem to link the yara tool. Since I was only interested in a simple
-proof-of-concept I decided to try and create my own `yara` implementation.
+The `yara` tools are written in C/C++. Libraries exist for other languages but
+they are mostly bindings against yaralib. Since I was only interested in a
+simple proof-of-concept I decided to try and create my own `yara`
+implementation.
 
 ## Parsing yara ##
 
@@ -52,10 +53,10 @@ Honestly I'd been looking to write my own parser for something since following
 Everything up to this point is me justifying to myself what kind of parser to
 create.
 
-That same tutorial recommended the [pom][pom] parser combinator library, which I
-decided to use to create my [yara parser][yara-parser]. It didn't take long at
-all to get a working parser for simple yara files. There are a whole bunch of
-features I'm ignoring for now to keep it simple.
+That same tutorial recommended the [pom][pom] parser combinator library. Which I
+used to create my [yara parser][yara-parser]. It didn't take long at all to get
+a working parser for simple yara files. There are some features I'm ignoring for
+now though, in order to keep it simple and get a proof of concept working.
 
 Here's an example of a yara rule and the parser output.
 
@@ -90,7 +91,8 @@ Here's an example of a yara rule and the parser output.
 
 It was really interesting to build the parser using combinators, the ways the
 pom library uses operators `+ - *` to connect the parsers is really powerful but
-looking back at the code it takes a bit of time to understand what's happening.
+looking back at the code it does take a bit of time to figure out what's
+happening.
 
 ## Simple matching ##
 
