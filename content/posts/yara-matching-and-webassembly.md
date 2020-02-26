@@ -49,7 +49,7 @@ implementation.
 ## Parsing yara ##
 
 Honestly I'd been looking to write my own parser for something since following
-[this excellent tutorial][parser-turorial] on parser combinators in Rust.
+[this excellent tutorial][parser-tutorial] on parser combinators in Rust.
 Everything up to this point is me justifying to myself what kind of parser to
 create.
 
