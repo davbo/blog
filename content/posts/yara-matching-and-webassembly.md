@@ -32,9 +32,37 @@ So it's both a language for describing characteristics of a file, known as
 "rules", and a tool which compares files against these rules looking to see if
 they match.
 
+Here's an example rule (taken from XProtect) to better understand what `yara`
+is doing.
+
+```yara
+rule GenieoD
+{
+    meta:
+        description = "OSX.Genieo.D"
+    strings:
+        $a = {49 89 C4 0F 57 C0 0F 29 85 80 FE FF FF 0F 29 85 70 FE FF FF 0F 29 85 60 FE FF FF 0F 29 85 50 FE FF FF 41 B8 10 00 00 00 4C 89 E7 48 8B B5 40 FE FF FF 48 8D 95 50 FE FF FF 48}
+        $b = {F2 0F 59 C1 F2 0F 5C D0 F2 0F 11 55 B8 0F 28 C2 F2 0F 10 55 D8 F2 0F 10 5D C8 F2 0F 58 DA F2 0F 59 D1 F2 0F 5C DA F2 0F 11 5D B0 0F 28 CB 31 FF BE 05 00 00 00 31 D2}
+        $c = {49 6E 73 74 61 6C 6C 4D 61 63 41 70 70 44 65 6C 65 67 61 74 65}
+    condition:
+        ($a or $b) and $c
+}
+```
+
+It's split into 3 sections:
+
+ - `meta` is an collection of arbitrary key-value fields (I've seen this used
+   for things like setting a severity level to different rules)
+ - `strings` includes the patterns which can be found within the malware file
+ - `condition` allows us to specify some boolean logic to the patterns
+ 
+In order to determine if a file matches the rule, yara searches the file the
+patterns in `strings` then applies the logic from `condition` to evaluate if
+it's a match.
+
 There are a lot of ways we should try and detect malicious behaviour in our
-systems. Rule-based malware detection is just one of them. I'm not suggesting
-this is a path browser vendors or anyone should pursue.
+systems. Signature-based malware detection is just one of them. I'm not
+suggesting this is a path browser vendors or anyone should pursue.
 
 ## Running yara in the browser ##
 
