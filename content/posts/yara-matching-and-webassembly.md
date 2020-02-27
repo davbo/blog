@@ -195,6 +195,10 @@ async function run() {
 run();
 ```
 
+[Give the demo a try](/demo), you'll need to open the developer console to see
+yara-rs match the rule and trust that the whole post isn't an elaborate ruse to
+get you mining cryptocurrency for me.
+
 If you'd like to try it out for yourself please clone [`yara-rs`][yara-rs] and
 follow the instructions in the README. I'm toying with developing a browser
 extension to build on this idea a bit further. I'd love to hear from anyone
