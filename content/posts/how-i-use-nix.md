@@ -2,7 +2,8 @@
 title: How I use Nix
 date: 2019-09-30T10:00:40Z
 draft: false
-author: Dave
+author: 
+ - Dave
 summary: Reflections on how I've been using Nix for the past few months.
 ---
 

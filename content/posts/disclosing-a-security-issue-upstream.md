@@ -2,7 +2,8 @@
 title: "Disclosing a security issue upstream"
 date: 2017-04-03T23:52:30Z
 draft: false
-author: Dave King while working at GDS
+author: 
+ - Dave King while working at GDS
 summary: While working at GDS I went through the process of responsible disclosure with an upstream open source project.
 ---
 

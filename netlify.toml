@@ -1,0 +1,13 @@
+[build]
+  publish = "public"
+  command = "hugo"
+[context.production.environment]
+  HUGO_VERSION = "0.69.0"
+[[headers]]
+  for = "atom.*"
+  [headers.values]
+    Content-Type = "application/atom+xml; charset=UTF-8"
+[[headers]]
+  for = "*.atom"
+  [headers.values]
+    Content-Type = "application/atom+xml; charset=UTF-8"

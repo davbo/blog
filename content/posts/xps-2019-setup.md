@@ -2,7 +2,8 @@
 title: Dev laptop - Ubuntu on the XPS 13 9380
 date: 2019-06-07T17:00:40Z
 draft: false
-author: Dave
+author: 
+ - Dave
 summary: Getting my new XPS ready for doing dev work was frustrating at times but I'm happy with the outcome. Hopefully sharing my setup can help others.
 ---
 

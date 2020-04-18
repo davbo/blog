@@ -1,7 +1,7 @@
 baseURL = "https://www.davbo.uk/"
 languageCode = "en-gb"
 title = "Dave sometimes writes"
-theme = "charaka-hugo-theme"
+theme = ["hugo-atom-feed", "charaka-hugo-theme"]
 staticDir = ["static"]
 copyright = "&copy; <a href=\"https://github.com/davbo\">Dave King</a> 2020 - using <a href=\"https://github.com/natarajmb/charaka-hugo-theme\">Charaka Hugo theme</a>"
 pygmentsCodeFences = true
@@ -16,3 +16,10 @@ pygmentsCodeFences = true
 [[params.social]]
   url = "https://twitter.com/davbo"
   fa_icon = "fab fa-twitter"
+
+[[params.social]]
+  url = "https://www.davbo.uk/feed.atom"
+  fa_icon = "fa fa-rss"
+
+[outputs]
+  home = ["HTML", "ATOM"]     # default = ["HTML", "RSS"]

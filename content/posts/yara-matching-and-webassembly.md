@@ -2,7 +2,8 @@
 title: Finding malicious WebAssembly with yara
 date: 2020-02-26T10:00:40Z
 draft: false
-author: Dave
+author: 
+ - Dave
 summary: I wrote a pattern matcher in rust which runs in Wasm to detect 👻 Wasm
 ---
 

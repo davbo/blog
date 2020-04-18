@@ -2,7 +2,8 @@
 title: Visiting Parliament
 date: 2019-06-27T17:00:40Z
 draft: false
-author: Dave
+author: 
+ - Dave
 summary: Went to parliament, got frustrated, wrote a blog post.
 ---
 

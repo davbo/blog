@@ -2,7 +2,8 @@
 title: Building a tool to improve our Github security
 date: 2018-07-13T00:06:40Z
 draft: false
-author: Dave King while working at GDS
+author: 
+ - Dave King while working at GDS
 summary: While at GDS I built a simple tool to capture an audit of activity in Github and record it into Amazon S3 for querying with Amazon Athena.
 ---
 
