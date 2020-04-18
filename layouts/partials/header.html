@@ -8,6 +8,8 @@
 
 <title>{{ .Title }}{{ if eq .IsHome false }} | {{ .Site.Title }}{{ end }}</title>
 
+<link rel="alternate" type="application/atom+xml" href="{{ "atom.xml" | absURL }}" />
+
 <link rel="stylesheet" href="{{ $scratch.Get "baseURL" }}/css/styles.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
