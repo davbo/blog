@@ -18,7 +18,7 @@ pygmentsCodeFences = true
   fa_icon = "fab fa-twitter"
 
 [[params.social]]
-  url = "https://www.davbo.uk/feed.atom"
+  url = "https://www.davbo.uk/atom.xml"
   fa_icon = "fa fa-rss"
 
 [outputs]
